@@ -42,7 +42,7 @@ We see single precision FP and possibly a poor recurrence relation contribute to
 The absolute error at $n=15$ is $-3.65749328$. \newline The relative error at $n=15$ is $-5.24810071 \times 10^7$. See python file ws21.py on Github for the complete error table.
 
 \section{Exercise 2}
-I define a loop that takes a function of a function, the latter being the function we are trying to differentiate. Forward differencing is first order convergent since convergence goes as $(1/)^2$ on halving $h$. Central differencing is second order convergent since convergence goes as $(1/2)^2=1/4$ on halving $h$. \newline See Figure~\ref{fig:1} for a plot of both forward and central differencing convergences for $h$ and $h/2$.
+I define a loop that takes a function of a function, the latter being the function we are trying to differentiate. Forward differencing is first order convergent since convergence goes as $(1/)^2$ on halving $h$. Central differencing is second order convergent since convergence goes as $(1/2)^2=1/4$ on halving $h$. \newline See Figure~\ref{fig:1} for a plot of the central and forward derivative estimates for $h=1$ as well as plots of both forward and central differencing convergences for $h$ and $h/2$.
 
 
 
@@ -89,12 +89,15 @@ See Figure~\ref{fig:3} for corresponding plots.
 
 \begin{figure}[bth]
 \centering
-\includegraphics[width=.7\textwidth]{ws22f.png}
+\includegraphics[width=.5\textwidth]{ws22f.png}
 \caption{Forward Difference Convergence.}
 \label{fig:1}
-\includegraphics[width=0.7\textwidth]{ws22c.png}
+\includegraphics[width=0.5\textwidth]{ws22c.png}
 \caption{Central Difference Convergence.}
-\label{}
+\label{fig:1}
+\includegraphics[width=0.5\textwidth]{ws22d.png}
+\caption{Central and Forward Derivatives}
+
 \end{figure}
 
 \begin{figure}[bth]
