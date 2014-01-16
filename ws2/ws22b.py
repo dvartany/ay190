@@ -75,6 +75,7 @@ conv = abserrb/abserra
 xco= linspace(-2,6,100)
 
 
+
 xlabel(r'x')
 ylabel('Absolute Error')
 p1,=plot(xco, abserra,'r', linewidth=2)
@@ -93,6 +94,17 @@ p1,=plot(xco, abserrc,'r', linewidth=2)
 p2,=plot(xco, abserrd, 'b', linewidth=2)
 legend((p1,p2),("h=1","h=.5"),loc=(0.7,0.75), frameon=False)
 text(0.2,0.5,"Absolute Error: Central Difference",fontsize=16,
+        horizontalalignment="left",rotation="horizontal",
+        transform=ax.transAxes)
+draw()
+raw_input()
+figure()
+xlabel(r'x')
+ylabel('Derivative')
+p1,=plot(xco, arraya1,'r', linewidth=2)
+p2,=plot(xco, arraya, 'b', linewidth=2)
+legend((p1,p2),("Central Derivative, $h=1$","Forward Derivative, $h=1$"),loc=(0.34,0.5), frameon=False)
+text(0.3,0.9,"Derivative Estimates",fontsize=16,
         horizontalalignment="left",rotation="horizontal",
         transform=ax.transAxes)
 draw()
