@@ -35,5 +35,4 @@ ys=[]
 for n in linspace(1,9,9):
     ys.extend([simp2(n)])
 
-print mdpt-pi, trapt-pi, simp-pi, 1./16.
-
+print mdpt, trapt, simp
