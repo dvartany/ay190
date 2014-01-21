@@ -1,0 +1,203 @@
+\documentclass[11pt,letterpaper]{article}
+
+% Load some basic packages that are useful to have
+% and that should be part of any LaTeX installation.
+%
+% be able to include figures
+\usepackage{graphicx}
+% get nice colors
+\usepackage{xcolor}
+
+% change default font to Palatino (looks nicer!)
+\usepackage[latin1]{inputenc}
+\usepackage{mathpazo}
+\usepackage[T1]{fontenc}
+% load some useful math symbols/fonts
+\usepackage{latexsym,amsfonts,amsmath,amssymb}
+
+% comfort package to easily set margins
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{hyperref}
+\usepackage[all]{hypcap}
+% control some spacings
+%
+% spacing after a paragraph
+\setlength{\parskip}{.15cm}
+% indentation at the top of a new paragraph
+\setlength{\parindent}{0.0cm}
+
+
+\begin{document}
+
+\begin{center}
+\Large
+Ay190 -- Worksheet 03 Writeup\\
+David Vartanyan\\
+Date: \today
+\end{center}
+
+\section{Exercise 1}
+
+For problem 1, I follow Professor Ott's example in class. I also define the integrands as a list with the $i$th element in the list corresponding to the $i$th integral interval in case one would be interested in plotting the integral. We will see, as expected, that midpoint and trapezoidal integral estimates have similar errors while Simpson's rule has much smaller error.
+
+\subsection{Exercise 1a}
+
+The exact integral is:
+\begin{equation}
+\int\limits_0^\pi \! \sin(x) \, \mathrm{d}x = 2
+\end{equation}
+
+Below, h indicates number of integral steps used. The py file in Github corresponds to $h=100$. This is easily changed.
+
+\subsubsection{Integrals}
+
+\begin{tabular}{|c|c|c|c|}
+  \hline
+ & Midpoint & Trapezoid & Simpson's\\ \hline
+  h=200 & 2.0000207690  & 1.99995846214
+ & 2.00000000004 \\
+  h=100 & 2.00008391911 &2.0000000007 & 1.99983216389 \\
+  \hline 
+\end{tabular}
+
+\subsubsection{Errors}
+
+\begin{tabular}{|c|c|c|c|}
+  \hline
+ & Midpoint & Trapezoid & Simpson's\\ \hline
+  h=200 & 2.07689960372e-05 &  -4.15378626695e-05 & 4.31352731312e-11\\
+  h=100 & 8.39191093354e-05 & -0.000167836106008 & 7.04220681769e-10 \\
+  \hline 
+\end{tabular} 
+
+\subsubsection{Convergence}
+
+
+\begin{tabular}{|c|c|c|}
+  \hline 
+  Midpoint & Trapezoid & Simpson's \\ \hline
+   0.247488280103 & 0.24749062438 &  0.061252494066\\
+   \hline 
+\end{tabular}\\
+
+Indeed, note that for the midpoint and trapezoid estimates, both of which are 2nd order, doubling the number of steps (or halving the step size, alternately) results in $1/4$th the error, as expected.\\\\ For the Simpson's estimate, which is 4th order, doubling the number of steps results in $1/16$th or $.0625$ the error. Ths our results are convergent.
+
+\subsection{Exercise 1b}
+
+The exact integral is:
+\begin{equation}
+\int\limits_0^\pi \! x  \sin(x) \, \mathrm{d}x = \pi
+\end{equation}
+
+As for 1a: below, h indicates number of integral steps used. The py file in Github corresponds to $h=100$. This is easily changed.
+
+\subsubsection{Integrals}
+
+\begin{tabular}{|c|c|c|c|}
+  \hline
+ & Midpoint & Trapezoid & Simpson's\\ \hline
+  h=200 & 3.14162527745 & 3.14152740607 & 3.14159265366 \\
+  h=100 & 3.14172447342 & 3.14132901725 & 3.1415926547
+ \\ \hline 
+\end{tabular}
+
+\subsubsection{Errors}
+
+\begin{tabular}{|c|c|c|c|}
+  \hline
+ & Midpoint & Trapezoid & Simpson's\\ \hline
+  h=200 & 3.26238626873e-05 & -6.52475221039e-05 & 6.77542466576e-11
+\\ h=100 & 0.000131819828693 & -0.00026363633882 & 1.10618980642e-09
+ \\  \hline 
+\end{tabular} 
+
+\subsubsection{Convergence}
+
+
+\begin{tabular}{|c|c|c|}
+  \hline 
+  Midpoint & Trapezoid & Simpson's \\ \hline
+   0.247488280108 & 0.24749062438 & 0.0612501093975\\
+   \hline 
+\end{tabular}\\
+
+Thus our results are convergent by the same argument presented for 1a.
+
+\section{Exercise 2}
+
+Consider electron number density:
+\begin{equation} \label{eq:1}
+n_e = \frac{8\pi(k_B T)^3}{(2\pi \hbar c)^3}\int\limits_0^\infty \! \frac{x^2}{e^x+1}  \, \mathrm{d}x
+\end{equation}
+
+
+\subsection{Exercise 2a}
+
+Integrating equation ~\eqref{eq:1} for 100 nodes gives $n_e =1.90215974998 \times 10^{35}$ electrons per $\mathrm{cm}^3$.
+
+I solve using the Gauss-Chebyev method.
+
+Below we tabulate our integrand without the numerical cofactor. Our github py file solves for $n=2$ nodes.
+
+\begin{tabular}{|c|c|}
+ \hline Nodes & Integrand \\ \hline
+  n=5 & 1.80202715322
+ \\
+  n=10 & 1.80309513198
+\\
+  n=100 & 1.80308535474
+\\
+  \hline 
+\end{tabular}\\\\
+
+\begin{tabular}{|c|c|}
+ \hline Nodes & Integrand Error \\ \hline
+  n=5 & -0.00105820157676
+ \\
+  n=10 & 9.77717911321e-06
+\\
+  n=100 &-6.05464567371e-11
+\\
+  \hline 
+\end{tabular}
+
+Thus our model is convergent. 
+
+\subsection{Exercise 2b}
+We write our equation over a differential energy, $\mathrm{d}E=\mathrm{d}(p c)$, so we have:
+
+\begin{equation}
+n_e = \frac{8\pi}{(2\pi \hbar c)^3}\int\limits_0^{150} \! \frac{x^2}{e^{\beta x}+1}  \, \mathrm{d}x
+\end{equation}
+
+To script for the Gauss-Laguerre model, I had to make use of the int command, which was new to me.
+
+Below we tabulate the integrand itself, without the numerical cofactor. Beyond $n=4$, increasing then number of nodes does not affect the result. We are likely dominated by roundoff error. Our Github py file is for $n=2$ nodes.\\
+
+\begin{tabular}{|c|c|}
+ \hline Nodes & Integrand \\ \hline
+  n=1 & 14101.1854368 \\
+  n=2 & 14100.6431677\\
+  n=4 & 14100.6539862\\
+  n=500 & 14100.6539862\\
+  \hline 
+\end{tabular}\\
+
+The exact integral, using Wolfram Alpha, returns $14100.7$ for the integrand without cofactor.\\
+
+\begin{tabular}{|c|c|}
+ \hline Nodes & Integrand Error \\ \hline
+  n=1 & 0.485436838491 \\
+  n=2 & -0.0568322618419\\
+  n=4 & -0.0460138192102\\
+  \hline 
+\end{tabular}\\
+
+We see convergence that at larger n is dominated by roundoff error.
+
+
+Including the cofactor, we have $n_e=1.85943058591 \times 10^{35}$ electrons per $\mathrm{cm}^3$, a few percent off from our result in 3a.
+
+
+\end{document}
+
