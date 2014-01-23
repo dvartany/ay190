@@ -1,0 +1,72 @@
+\documentclass[11pt,letterpaper]{article}
+
+% Load some basic packages that are useful to have
+% and that should be part of any LaTeX installation.
+%
+% be able to include figures
+\usepackage{graphicx}
+% get nice colors
+\usepackage{xcolor}
+
+% change default font to Palatino (looks nicer!)
+\usepackage[latin1]{inputenc}
+\usepackage{mathpazo}
+\usepackage[T1]{fontenc}
+% load some useful math symbols/fonts
+\usepackage{latexsym,amsfonts,amsmath,amssymb}
+
+% comfort package to easily set margins
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{hyperref}
+\usepackage[all]{hypcap}
+% control some spacings
+%
+% spacing after a paragraph
+\setlength{\parskip}{.15cm}
+% indentation at the top of a new paragraph
+\setlength{\parindent}{0.0cm}
+
+
+\begin{document}
+
+\begin{center}
+\Large
+Ay190 -- Worksheet 04 Writeup\\
+David Vartanyan\\
+Date: \today
+\end{center}
+
+\section{Exercise 1}
+
+\subsection{1a}
+
+We have an eccentricity $e=.0167$. No. Iter in the table below indicates number of iterations for convergence to a relative error $h < 10^{-10}$. X,Y are as defined in WS4.
+
+\begin{tabular}{|c|c|c|c|c|}
+  \hline
+Time t (days) & E & No. Iter & X  & Y\\ \hline
+t=91 & 1.5820922889916236 &  4 &  -0.0112957219731 &  0.99979675547 \\
+t=182 & 3.1309642006817362 & 3 &  -0.999943518526 & 0.0106267706437 \\
+t=273 & 4.6794891005321526 & 4 &  -0.0328939450239 & -0.99931946851\\ \hline
+
+\end{tabular}
+
+I provide two py files in Github.  test.py uses the While function, a.py does not. The latter converges slightly faster.
+
+\subsection{1b}
+
+Now our eccentricity is $e=.99999$. 
+
+\begin{tabular}{|c|c|c|c|c|}
+  \hline
+Time t (days) & E & No. Iter & X  & Y\\ \hline
+t=91 & 2.3066463874889318 &  98 &  -0.671217514443 & 0.0033150092035\\
+t=182 & 3.1361896410659678 & 50 &  -0.999985403763 & 2.41628286026e-05 \\
+t=273 & 3.9636437776514937 &  35 & -0.680720102446 & -0.00327602643158\\ \hline
+
+\end{tabular}
+
+To improve convergence, we could simply increase our function dE by defining $dE=f(E)/df(E) \times constant$ or simply absorbing that constant and forming a new f(E), df(E).
+
+
+\end{document}
