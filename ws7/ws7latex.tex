@@ -1,0 +1,83 @@
+\documentclass[11pt,letterpaper]{article}
+
+% Load some basic packages that are useful to have
+% and that should be part of any LaTeX installation.
+%
+% be able to include figures
+\usepackage{graphicx}
+% get nice colors
+\usepackage{xcolor}
+
+% change default font to Palatino (looks nicer!)
+\usepackage[latin1]{inputenc}
+\usepackage{mathpazo}
+\usepackage[T1]{fontenc}
+% load some useful math symbols/fonts
+\usepackage{latexsym,amsfonts,amsmath,amssymb}
+
+% comfort package to easily set margins
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{hyperref}
+\usepackage[all]{hypcap}
+% control some spacings
+%
+% spacing after a paragraph\begin{figure}[bth]
+\setlength{\parskip}{.15cm}
+% indentation at the top of a new paragraph
+\setlength{\parindent}{0.0cm}
+
+\begin{document}
+
+\begin{center}
+\Large
+Ay190 -- Worksheet 07\\
+David Vartanyan\\
+Date: \today
+\end{center}
+
+\section{Exercise 1}
+
+
+For small sample size $N$, error decreases with sample size following the $N^{-1/2}$ convergence for MC methods. However, we see for larger sample size $N$, the error becomes oscillatory. Roundoff error probably dominates here.
+
+See Figure ~\ref{fig:1}.
+
+SystemRandom uses system processes to generate random numbers instead of the seed algorithm using in the previous part. 
+
+See Figure ~\ref{fig:2}
+
+\section{Exercise 2}
+
+We see that in a group $23$ people, the probability for a birthday among exactly two people to be shared is greater than $0.5$. We run this for a varying amount of runs. Increasing the runs(the sample sizes) returns expected convergence.
+
+To compute this analytically: let $p_{dif}(n)$ be the probability for everyone in a group of $n$ people to have a different birthday.
+
+Then, 
+
+\begin{equation}
+p_{dif}(n)=1\times(1-\frac{1}{365})\times(1-\frac{2}{365})...
+\end{equation}
+
+The probability for at least $2$ people to share a birthday is then $p(n)=1-p_{dif}(n)$.
+
+If we simplify our expression for $p_{dif}$, we get
+
+\begin{equation}
+p(n)=1-\frac{365!}{365^{n}(365-n)!}
+\end{equation}
+
+\begin{figure}[bth]
+\centering
+\includegraphics[width=0.7\textwidth]{ws7a.png}
+\caption{Random.Seed Error.}
+\label{fig:1}
+\end{figure}
+
+\begin{figure}[bth]
+\centering
+\includegraphics[width=0.7\textwidth]{ws7b.png}
+\caption{System.Random Error.}
+\label{fig:2}
+\end{figure}
+
+\end{document}
