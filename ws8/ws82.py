@@ -29,7 +29,12 @@ def tov_RHS(rad,rho,m):
 
     return rhs
 
-def tov_integrate_FE(rad,dr,p,rho,m):
+def P2rho(pressure):
+    return (pressure/polyK)**(1.0/polyG)
+
+
+
+def tov_integrate_FE(rad,h,p,rho,m):
 
     # RK2 integrator
 
@@ -39,10 +44,11 @@ def tov_integrate_FE(rad,dr,p,rho,m):
     old[1] = m
 
     # 
-    k1=h*tov_RHS(rad,rho,m)
-    k2=h*tov_RHS(rad+.5*h,rho+.5*(k1[0]/(polyK*polyG*rho**(polyG-1))),m+.5*k1[1])
+    k1 = h*tov_RHS(rad,rho,m)
+    k2 = h * tov_RHS(rad+.5*h,P2rho(p+.5*k1[0]),m+.5*k1[0])
+    #k2[1] = dr * tov_RHS(rad+.5*dr,P2rho(p+.5*k1[0]),m+.5*k1[1])[1]
     new = old + k2
-    
+
     
     # assign outputs
     pnew = new[0]
@@ -92,7 +98,6 @@ for n in range(npoints-1):
 
 print radius[nsurf]/1.0e5
 print mass[nsurf]/msun
-print radius[.1]
 plt.xlabel("Radius[cm]")
 plt.ylabel(r'$P/P_c$,  $\rho/\rho_c$')
 p1,=plt.plot(radius,rho/rho[0],'r')
