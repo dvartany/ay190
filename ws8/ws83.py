@@ -28,7 +28,7 @@ def tov_RHS(rad,rho,m):
 
     return rhs
 
-def tov_integrate_FE(rad,dr,p,rho,m):
+def tov_integrate_FE(rad,h,p,rho,m):
 
     # RK2 integrator
 
