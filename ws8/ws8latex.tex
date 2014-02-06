@@ -1,0 +1,70 @@
+\documentclass[11pt,letterpaper]{article}
+
+% Load some basic packages that are useful to have
+% and that should be part of any LaTeX installation.
+%
+% be able to include figures
+\usepackage{graphicx}
+% get nice colors
+\usepackage{xcolor}
+
+% change default font to Palatino (looks nicer!)
+\usepackage[latin1]{inputenc}
+\usepackage{mathpazo}
+\usepackage[T1]{fontenc}
+% load some useful math symbols/fonts
+\usepackage{latexsym,amsfonts,amsmath,amssymb}
+
+% comfort package to easily set margins
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{hyperref}
+\usepackage[all]{hypcap}
+% control some spacings
+%
+% spacing after a paragraph\begin{figure}[bth]
+\setlength{\parskip}{.15cm}
+% indentation at the top of a new paragraph
+\setlength{\parindent}{0.0cm}
+
+\begin{document}
+
+\begin{center}
+\Large
+Ay190 -- Worksheet 08\\
+David Vartanyan\\
+Date: \today
+\end{center}
+
+\section{}
+
+The tov$\_$RHS function is simply our system of two ODEs and it returns an array of $[\frac{dP}{dr}, \frac{dM}{dr}]$ for pressure $P$, mass $M$, and radius $r$.
+
+Then, tov$\_$integratefe integrates tov$\_$RHS using a defined method (either forward Euler or RK2,3,4 for our cases). It returns $[P,M]$.
+
+We then divide our star into a grid (in our case, 1000 points) and give boundary values. We define our pressure, radius, and mass as arrays of zeros of length npoints, the number of points in our grid. The zeroth values of these arrays are our central values. Setting up a large radius max (much larger than the radius of a dwarf star) gives us a safety net for calculation. We also fill in the polytropic EOS inversion to find density as a function of pressure. Our loop procedes by intervals of $dr$ or $h$.
+
+We also set up a termination and iteration criterion for our code by defining a cutoff pressure, press$\_$min, that identifies the surface of our star. We loop over our grid. If our pressure is less than the cutoff pressure, we go back one loop and define that gridpoint $nsurf$ as our surface. Otherwise, we continue, upgrading the $nth$ item in our pressure, mass, density arrays corresponding to the $nth$ grid point.
+
+Our adiabatic index is $4/3$, the value for a relativistic gas, degenerate or not. Indeed, a dwarf star is relativistic gas.
+
+\section{}
+
+I add an RK-2 integrator. I have to rewrite the first element of our tovRHS function, which returns an array of [pressure, mass], into density using the polytropic equation of state.
+
+I'm not sure how to check convergence rate, but RK2 should converge twice as fast as forward Euler.
+
+I calculate RK-3 and RK-4 as well, similarly to RK-2. To our level of precision, the results are identical
+
+\section{}
+I plot density, pressure, and mass rescaled at their central, central, and total values, respectively. I use the twinx() function of matplotlib to ad an additional y-axis. I don't use a logarithmic scale; a linear scale shows the evolution clearly for our case.
+
+See Figure ~\ref{fig:1}.
+
+\begin{figure}[bth]
+\centering
+\includegraphics[width=0.7\textwidth]{ws8.png}
+\caption{Scaled Pressure, Mass, Density}
+\label{fig:1}
+\end{figure}
+
+\end{document}
