@@ -1,0 +1,85 @@
+\documentclass[11pt,letterpaper]{article}
+
+% Load some basic packages that are useful to have
+% and that should be part of any LaTeX installation.
+%
+% be able to include figures
+\usepackage{graphicx}
+% get nice colors
+\usepackage{xcolor}
+
+% change default font to Palatino (looks nicer!)
+\usepackage[latin1]{inputenc}
+\usepackage{mathpazo}
+\usepackage[T1]{fontenc}
+% load some useful math symbols/fonts
+\usepackage{latexsym,amsfonts,amsmath,amssymb}
+
+% comfort package to easily set margins
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{hyperref}
+\usepackage[all]{hypcap}
+% control some spacings
+%
+% spacing after a paragraph\begin{figure}[bth]
+\setlength{\parskip}{.15cm}
+% indentation at the top of a new paragraph
+\setlength{\parindent}{0.0cm}
+
+\begin{document}
+
+\begin{center}
+\Large
+Ay190 -- Worksheet 09\\
+David Vartanyan\\
+Date: \today
+\end{center}
+
+\section{}
+
+The goal is to solve the linear system of equations:
+
+\begin{equation}
+  A x = b
+\end{equation}
+
+for $nxn$ matrices $A$ and $nx1$ vectors $b$. 
+I write a fanciful code that checks that each matrix $A$ is square and of same dimension as the vector $b$. I find the determinant, which is nonzero in every case. Thus these matrices can be solved.For matrices LSE4$\_$m and LSE5$\_$m I find the natural log of the determinant because attempting to calculate the determinant itself encounters overflow error.
+
+The dimensions and determinants are available for any of the LSEs in ws9.py.
+
+\begin{tabular}{|c|c|c|c|c|c|}
+  \hline
+& LSE1 & LSE2 & LSE3  & LSE4 & LSE5\\ \hline
+Det Sign & 1 & -1 & -1 & -1 & 1\\
+Det Natural Log & -4.53358731971 & 77.1114857221 & 226.07016741 & 1930.40191136 &  4563.75910742\\
+Matrix Dim & 10 & 100 & 200 & 1000 & 2000\\ \hline
+\end{tabular}
+
+\section{}
+
+I use the code available at \url{http://shiftycow.net/gauss-elimination-functions-in-python-and-matlab/}. Note this code does not pivot the matrices. It takes as an input an $n\,x\,n+1$ matrix whose $n+1$th column is the vector $b$. Code is available at ws9b1.py. I use time.clock to time the evaluation.
+
+\begin{tabular}{|c|c|c|c|c|c|}
+  \hline
+& LSE1 & LSE2 & LSE3  & LSE4 & LSE5\\ \hline
+time (s) & 0.0 & 0.08 & 0.3 & 21.42 & 173.52\\ \hline
+
+\end{tabular}
+
+\section{}
+
+I used scipy.linalg to solve the system of equations using time.clock to time the results as above. Code is avaialable at ws9c.py.
+
+\begin{tabular}{|c|c|c|c|c|c|}
+  \hline
+& LSE1 & LSE2 & LSE3  & LSE4 & LSE5\\ \hline
+time (s) & 0.0 & 0.0 & 0.1& 0.24 & 1.78\\ \hline
+
+\end{tabular}
+
+Clearly scipy.linalg runs much faster (by two orders for the last three matrices), but we again see exponential growth in run time. Double the array dimension increases evaluation time by $9$ and not 4 as we would expect for an evaluation of time order $n^{2}$.
+
+\end{document}
+
+
