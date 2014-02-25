@@ -1,0 +1,61 @@
+\documentclass[11pt,letterpaper]{article}
+
+% Load some basic packages that are useful to have
+% and that should be part of any LaTeX installation.
+%
+% be able to include figures
+\usepackage{graphicx}
+% get nice colors
+\usepackage{xcolor}
+
+% change default font to Palatino (looks nicer!)
+\usepackage[latin1]{inputenc}
+\usepackage{mathpazo}
+\usepackage[T1]{fontenc}
+% load some useful math symbols/fonts
+\usepackage{latexsym,amsfonts,amsmath,amssymb}
+
+% comfort package to easily set margins
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{hyperref}
+\usepackage[all]{hypcap}
+% control some spacings
+%
+% spacing after a paragraph\begin{figure}[bth]
+\setlength{\parskip}{.15cm}
+% indentation at the top of a new paragraph
+\setlength{\parindent}{0.0cm}
+
+\begin{document}
+
+\begin{center}
+\Large
+Ay190 -- Worksheet 13\\
+David Vartanyan\\
+Date: \today
+\end{center}
+
+\section{}
+Skeletal code is loaded and ready to go!
+
+\section{}
+My RHS  is an $m \times n$ matrix. The first three columns correspond to coordinate velocities, the last three coordinate accelerations.
+
+I use RK2 integration to solve for the updated coordinate positions and velocities.
+
+\section{}
+The energy of the Earth-Sun gradually increases (keeping in mind negative convention), indicating the system is spiraling outwards. See ~\ref{fig:1}.
+
+No difference is observed in changing resolution from $5000$ Nsteps to $10000$.
+
+\section{}
+We simulate sgrAstar for 100 years. The total energy evolves much worse than the Earth-sun system as we can see by comparing to the actual trajectory from UChicago Astro And UCLA astro. In fact, the energy becomes positive after a thresholdof a few years.
+
+\begin{figure}[bth]
+\centering
+\includegraphics[width=0.7\textwidth]{ws131.png}
+\caption{Earth-Sun Energy Evolution}
+\label{fig:1}
+\end{figure}
+
+\end{document}
